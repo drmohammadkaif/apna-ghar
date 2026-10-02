@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en"><head><meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
 <title>Apna Ghar</title>
 <link rel="manifest" href="/manifest.webmanifest"><meta name="theme-color" content="#3f7d68"><link rel="icon" href="/icon.svg" type="image/svg+xml"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Apna Ghar"><meta name="apple-mobile-web-app-status-bar-style" content="default">
 <style>
@@ -49,6 +49,13 @@ label{display:block;font-size:13px;color:var(--mut);margin:10px 0 4px}
 input,select{width:100%;font:inherit;padding:10px;border:1px solid var(--line);border-radius:5px;background:var(--bg);color:var(--ink)}
 .ra{display:flex;gap:8px;margin-top:16px;justify-content:flex-end}
 .empty{padding:16px;color:var(--mut);text-align:center}
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%}html,body{overflow-x:hidden;width:100%}
+input,select,textarea{font-size:16px!important}
+.top{flex-wrap:wrap}.it>div:first-child{min-width:0;flex:1}.amt{white-space:normal;max-width:58%}.grid>div,.pass .row>span,nav button{min-width:0}.n{overflow-wrap:anywhere}
+@media(min-width:600px){body,nav{max-width:720px}}
+@media(min-width:900px){body,nav{max-width:1000px}.fab{right:max(16px,calc((100vw - 1000px)/2 + 16px))}
+#main.home,#main.cards,#main.loans,#main.fam{display:grid;grid-template-columns:1fr 1fr;align-items:start}
+#main.home>.pass,#main.cards>.ra:first-child,#main.loans>.ra:first-child,#main.fam>div:last-child{grid-column:1/-1}}
 </style></head><body>
 <div class="top"><h1>Apna Ghar <span style="color:var(--gold)">&hearts;</span></h1><span class="sub" id="dt"></span><button class="btn" id="ib" style="display:none" onclick="inst()">Install</button></div>
 <div class="chips" id="chips"></div><div id="ios" class="sub" style="padding:0 16px;display:none">To install on iPhone: tap Share, then Add to Home Screen.</div>
@@ -111,7 +118,7 @@ function home(){if(!S.members.length)return `<div class="card"><div class="n" st
 S.cards.filter(vis).forEach(c=>{const k=cc(c);unb+=k.unb;if(k.billed>0)cs.push({n:c.name,o:c.owner,d:k.due,a:k.billed,s:'Min '+inr(k.min)})});
 S.loans.filter(l=>vis(l)&&l.principal>0).forEach(l=>{const k=ln(l);ls.push({n:l.name,o:l.owner,d:k.d,a:l.emi,s:'Principal '+inr(k.p)})});
 const by=(a,b)=>a.d-b.d;cs.sort(by);ls.sort(by);const sum=a=>a.reduce((t,x)=>t+x.a,0);
-const sec=(t,a)=>`<h2>${t} <span class="sub">${a.length} due \u00B7 ${inr(sum(a))}</span></h2><div class="list">${a.map(row).join('')||'<div class="empty">Nothing due.</div>'}</div>`;
+const sec=(t,a)=>`<section><h2>${t} <span class="sub">${a.length} due \u00B7 ${inr(sum(a))}</span></h2><div class="list">${a.map(row).join('')||'<div class="empty">Nothing due.</div>'}</div></section>`;
 return `<div class="pass"><div class="sub">Total to pay this cycle</div><div class="big">${inr(sum(cs)+sum(ls))}</div>
 <div class="row"><span>Card bills<b>${inr(sum(cs))}</b></span><span>Loan EMIs<b>${inr(sum(ls))}</b></span><span style="text-align:right">Unbilled<b>${inr(unb)}</b></span></div></div>`+sec('Credit cards',cs)+sec('Loans',ls)}
 function cards(){return `<div class="ra" style="padding:0 16px;margin:6px 0 0"><button class="btn p" onclick="cardForm()">Add new card</button></div>`+S.cards.filter(vis).map(c=>{const k=cc(c);const used=k.billed+k.unb;const o=open===c.id;
@@ -133,7 +140,7 @@ return `<div class="card"><div class="n" style="font-weight:700;font-size:17px">
 function render(){hdr();
 $('#chips').innerHTML=[{id:'all',name:'Everyone'}].concat(S.members).map(m=>`<button class="chip ${F===m.id?'on':''}" onclick="F='${m.id}';render()">${m.name}</button>`).join('');
 $('#nav').innerHTML=[['home','Home'],['cards','Cards'],['loans','Loans'],['fam','Family']].map(t=>`<button class="${tab===t[0]?'on':''}" onclick="tab='${t[0]}';render()">${t[1]}</button>`).join('');
-$('#main').innerHTML={home,cards,loans,fam}[tab]();document.querySelector('.fab').style.display=S.cards.length?'':'none'}
+$('#main').className=tab;$('#main').innerHTML={home,cards,loans,fam}[tab]();document.querySelector('.fab').style.display=S.cards.length?'':'none'}
 function showS(h){$('#sc').innerHTML=h;$('#sheet').classList.add('show')}
 function closeS(){$('#sheet').classList.remove('show')}
 let X={mode:'e',m:null};
