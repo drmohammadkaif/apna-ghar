@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Apna Ghar</title>
+<link rel="manifest" href="/manifest.webmanifest"><meta name="theme-color" content="#3f7d68"><link rel="icon" href="/icon.svg" type="image/svg+xml"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Apna Ghar"><meta name="apple-mobile-web-app-status-bar-style" content="default">
+<style>
+:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);color-scheme:light;--bg:#f8faf5;--card:#fff;--ink:#1f2d27;--mut:#6a766d;--g:#3f7d68;--gold:#b08a35;--line:#dfe6da;--red:#a23b3b;--ok:#2f7a52;--on:#fff}
+*,*:before,*:after{box-sizing:inherit}
+html,body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.5 Georgia,'Iowan Old Style',Palatino,serif}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{padding-bottom:calc(84px + env(safe-area-inset-bottom,0px));max-width:560px;margin:0 auto}
+h1{font-size:22px;margin:0;font-weight:700;letter-spacing:.2px}
+h2{font-size:17px;margin:22px 16px 8px;font-weight:700}
+.top{padding:16px 16px 6px;display:flex;justify-content:space-between;align-items:baseline}
+.sub{color:var(--mut);font-size:13px}.top{gap:8px}
+.chips{display:flex;gap:8px;overflow-x:auto;padding:8px 16px}
+.chip{border:1px solid var(--line);background:var(--card);color:var(--ink);padding:6px 14px;border-radius:99px;font:inherit;font-size:13px;white-space:nowrap}
+.chip.on{background:var(--g);color:var(--on);border-color:var(--g)}
+.pass{margin:8px 16px;background:#e5efe1;color:var(--ink);border-radius:6px;padding:18px 18px 14px;border-left:8px solid var(--gold)}
+.pass .big{font-size:34px;font-weight:700;margin:2px 0 10px;color:#2d5f4d}
+.pass .row{display:flex;justify-content:space-between;font-size:13px;border-top:1px solid rgba(31,45,39,.15);padding-top:8px;gap:8px}
+.pass .row b{display:block;font-size:16px}
+.list{margin:0 16px;background:var(--card);border:1px solid var(--line);border-radius:6px}
+.it{display:flex;justify-content:space-between;gap:10px;padding:12px 14px;border-bottom:1px solid var(--line);align-items:center}
+.it:last-child{border:0}
+.it .n{font-weight:700}.it .m{color:var(--mut);font-size:13px}
+.amt{font-weight:700;text-align:right;white-space:nowrap}
+.late{color:var(--red)}.soon{color:var(--gold)}.paid{color:var(--ok)}
+.card{margin:10px 16px;background:var(--card);border:1px solid var(--line);border-radius:6px;padding:14px}
+.card .h{display:flex;justify-content:space-between;gap:8px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px}
+.grid div{font-size:12.5px;color:var(--mut)}.grid b{display:block;color:var(--ink);font-size:15px}
+.bar{height:6px;background:var(--line);border-radius:4px;margin-top:12px;overflow:hidden}.bar i{display:block;height:100%;background:var(--gold)}
+.btn{font:inherit;font-size:13px;border:1px solid var(--g);background:none;color:var(--g);padding:6px 12px;border-radius:5px}
+.btn.p{background:var(--g);color:var(--on)}
+nav{position:fixed;bottom:0;left:0;right:0;max-width:560px;margin:0 auto;display:flex;background:var(--card);border-top:1px solid var(--line);padding-bottom:env(safe-area-inset-bottom,0px)}
+nav button{flex:1;border:0;background:none;color:var(--mut);font:inherit;font-size:13px;padding:14px 0}
+nav button.on{color:var(--ink);font-weight:700;box-shadow:inset 0 -3px var(--gold)}
+.fab{position:fixed;right:16px;bottom:calc(72px + env(safe-area-inset-bottom,0px));background:var(--gold);color:#fff;border:0;border-radius:99px;padding:12px 18px;font:inherit;font-weight:700;box-shadow:0 2px 8px rgba(0,0,0,.25)}
+.sheet{position:fixed;inset:0;background:rgba(0,0,0,.45);display:none;align-items:center;justify-content:center;padding:16px;z-index:9}
+.sheet.show{display:flex}
+#sc{width:100%;max-width:440px;max-height:100%;overflow:auto;border-radius:14px;box-shadow:0 10px 30px rgba(0,0,0,.25)}
+.sheet form,.sheet .box{background:var(--card);padding:20px 18px;border-radius:14px}
+.pb{display:flex;flex-direction:column;align-items:flex-start;gap:2px;width:100%;margin-top:10px;padding:12px 14px;border:1px solid var(--line);border-radius:8px;background:var(--bg);font:inherit;color:var(--ink);text-align:left}.pb span{font-size:13px;color:var(--mut)}
+.pby{margin-top:12px;padding:12px 14px;border-radius:8px;background:#eef4ea;border-left:5px solid var(--gold);display:flex;flex-direction:column}.pby span{font-size:12.5px;color:var(--mut)}.pby b{font-size:24px;line-height:1.25}
+.dt{font-size:14px;font-weight:700}
+.lk{background:none;border:0;font:inherit;font-size:13px;color:var(--g);text-decoration:underline;padding:6px 8px}.lk.late{color:var(--red)}.box p{margin:10px 0}
+label{display:block;font-size:13px;color:var(--mut);margin:10px 0 4px}
+input,select{width:100%;font:inherit;padding:10px;border:1px solid var(--line);border-radius:5px;background:var(--bg);color:var(--ink)}
+.ra{display:flex;gap:8px;margin-top:16px;justify-content:flex-end}
+.empty{padding:16px;color:var(--mut);text-align:center}
+</style></head><body>
+<div class="top"><h1>Apna Ghar <span style="color:var(--gold)">&hearts;</span></h1><span class="sub" id="dt"></span><button class="btn" id="ib" style="display:none" onclick="inst()">Install</button></div>
+<div class="chips" id="chips"></div><div id="ios" class="sub" style="padding:0 16px;display:none">To install on iPhone: tap Share, then Add to Home Screen.</div>
+<main id="main"></main>
+<button class="fab" onclick="openExp()">Add expense</button>
+<nav id="nav"></nav>
+<div class="sheet" id="sheet" onclick="if(event.target===this)closeS()"><div id="sc"></div></div>
+<script>
+let T=new Date();T.setHours(0,0,0,0);
+const $=s=>document.querySelector(s);
+const inr=n=>'\u20B9'+Math.round(n).toLocaleString('en-IN');
+const iso=d=>d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');
+const pd=s=>{const a=s.split('-');return new Date(+a[0],a[1]-1,+a[2])};
+const fmt=d=>d.toLocaleDateString('en-IN',{day:'numeric',month:'short'});
+const dd=d=>Math.round((d-T)/864e5);
+const mk=(y,m,day)=>new Date(y,m,Math.min(day,new Date(y,m+1,0).getDate()));
+const ago=n=>iso(new Date(T.getFullYear(),T.getMonth(),T.getDate()-n));
+let S,F='all',tab='home',open=null;
+const KEY='ag1',C=['members','cards','loans','entries'];
+let ws=null,Q=[],inf=0,base={},ON=0,tm=0;
+try{S=JSON.parse(localStorage.getItem(KEY))}catch(x){}
+if(!S||typeof S!=='object')S={};C.forEach(c=>{if(!Array.isArray(S[c]))S[c]=[]});
+try{Q=JSON.parse(localStorage.getItem(KEY+'q'))||[]}catch(x){Q=[]}
+const cl_=x=>String(x).replace(/[<>&]/g,'').trim();
+const store=()=>{try{localStorage.setItem(KEY,JSON.stringify(S))}catch(x){}};
+const saveQ=()=>{try{localStorage.setItem(KEY+'q',JSON.stringify(Q))}catch(x){}};
+function snap(){const b={};C.forEach(c=>{b[c]={};S[c].forEach(x=>{b[c][x.id]=JSON.stringify(x)})});return b}
+base=snap();
+function ops(){const n=snap(),o=[];C.forEach(c=>{for(const id in n[c])if(n[c][id]!==base[c][id])o.push({c,id,v:JSON.parse(n[c][id])});for(const id in base[c])if(!(id in n[c]))o.push({c,id,d:1})});base=n;return o}
+function save(){store();const o=ops();if(o.length){Q.push(...o);saveQ();flush()}}
+function flush(){if(inf||!ws||ws.readyState!==1||!Q.length)return;inf=Q.length;ws.send(JSON.stringify({t:'ops',ops:Q.slice(0,inf)}))}
+function applyOp(o){const a=S[o.c],i=a.findIndex(x=>String(x.id)===o.id);if(o.d){if(i>-1)a.splice(i,1)}else if(i>-1)a[i]=o.v;else a.push(o.v)}
+function hdr(){$('#dt').textContent=T.toLocaleDateString('en-IN',{weekday:'short',day:'numeric',month:'short'})+' \u00B7 '+(ON?'Synced':'Offline')}
+function conn(){if(ws)return;let w;try{w=new WebSocket((location.protocol==='https:'?'wss://':'ws://')+location.host+'/api/ws')}catch(e){return}ws=w;
+w.onopen=()=>{ON=1;hdr();inf=0;tm=setInterval(()=>{if(w.readyState===1)w.send('ping')},25000)};
+w.onmessage=ev=>{let j;try{j=JSON.parse(ev.data)}catch(e){return}
+if(j.t==='snap'){C.forEach(c=>{S[c]=Object.values(j.data[c]||{})});Q.forEach(applyOp);base=snap();store();render();flush()}
+else if(j.t==='ops'){j.ops.forEach(applyOp);base=snap();store();render()}
+else if(j.t==='ack'){Q.splice(0,inf);inf=0;saveQ();flush()}};
+w.onclose=()=>{clearInterval(tm);ON=0;hdr();inf=0;ws=null;setTimeout(conn,3000)};w.onerror=()=>{try{w.close()}catch(e){}}}
+const mem=id=>(S.members.find(m=>m.id===id)||{name:'?'}).name;
+const vis=o=>F==='all'||o.owner===F;
+function cc(c){let L=mk(T.getFullYear(),T.getMonth(),c.stmt);if(L>T)L=mk(T.getFullYear(),T.getMonth()-1,c.stmt);
+const P=mk(L.getFullYear(),L.getMonth()-1,c.stmt);
+const es=S.entries.filter(e=>e.card===c.id);let billed=0,unb=0;
+es.forEach(e=>{const d=pd(e.date);if(d>L)unb+=e.amt;else if(d>P)billed+=e.amt});
+let due=mk(L.getFullYear(),L.getMonth(),c.due);if(due<=L)due=mk(L.getFullYear(),L.getMonth()+1,c.due);
+const am=b=>Math.max(Math.round(b*.05),200);let paid=c.paid===iso(L),bill0=billed,how=paid?c.how:'',mn0=Math.min(bill0,am(bill0));if(paid)billed=0;
+let min=billed>0?Math.min(billed,am(billed)):0;
+const st=(c.stmts||[]).filter(x=>pd(x.date)<=T).sort((a,b)=>a.date<b.date?1:-1)[0];
+if(st&&pd(st.date)>P){L=pd(st.date);unb=0;es.forEach(e=>{if(pd(e.date)>L)unb+=e.amt});paid=!!st.paid;bill0=st.amt;how=st.how;mn0=Math.min(bill0,st.min==null?am(bill0):st.min);billed=paid?0:st.amt;due=pd(st.due);min=billed>0?Math.min(billed,st.min==null?am(billed):st.min):0}
+let nx=mk(T.getFullYear(),T.getMonth(),c.stmt);if(nx<=T)nx=mk(T.getFullYear(),T.getMonth()+1,c.stmt);
+return{L,billed,unb,due,min,paid,nx,es,st,bill0,how,mn0}}
+function ln(l){let d=mk(T.getFullYear(),T.getMonth(),l.day);if(d<T)d=mk(T.getFullYear(),T.getMonth()+1,l.day);if(l.last===iso(d))d=mk(d.getFullYear(),d.getMonth()+1,l.day);
+const i=l.principal*l.rate/1200;return{d,i,p:Math.max(l.emi-i,0)}}
+const cls=n=>n<0?'late':n<=5?'soon':'';
+const when=n=>n<0?Math.abs(n)+'d overdue':n===0?'today':n===1?'tomorrow':'in '+n+' days';
+const row=x=>`<div class="it"><div><div class="n">${x.n}</div><div class="m">${mem(x.o)} \u00B7 ${x.s}</div></div><div class="amt">${inr(x.a)}<div class="dt ${cls(dd(x.d))}">${x.d.toLocaleDateString('en-IN',{weekday:'short',day:'numeric',month:'short'})} \u00B7 ${when(dd(x.d))}</div></div></div>`;
+function home(){if(!S.members.length)return `<div class="card"><div class="n" style="font-weight:700;font-size:18px">Welcome to Apna Ghar</div><p class="sub">Start by adding your family members. Then add each person's credit cards and loans.</p><button class="btn p" onclick="addM()">Add first family member</button></div>`;const cs=[],ls=[];let unb=0;
+S.cards.filter(vis).forEach(c=>{const k=cc(c);unb+=k.unb;if(k.billed>0)cs.push({n:c.name,o:c.owner,d:k.due,a:k.billed,s:'Min '+inr(k.min)})});
+S.loans.filter(l=>vis(l)&&l.principal>0).forEach(l=>{const k=ln(l);ls.push({n:l.name,o:l.owner,d:k.d,a:l.emi,s:'Principal '+inr(k.p)})});
+const by=(a,b)=>a.d-b.d;cs.sort(by);ls.sort(by);const sum=a=>a.reduce((t,x)=>t+x.a,0);
+const sec=(t,a)=>`<h2>${t} <span class="sub">${a.length} due \u00B7 ${inr(sum(a))}</span></h2><div class="list">${a.map(row).join('')||'<div class="empty">Nothing due.</div>'}</div>`;
+return `<div class="pass"><div class="sub">Total to pay this cycle</div><div class="big">${inr(sum(cs)+sum(ls))}</div>
+<div class="row"><span>Card bills<b>${inr(sum(cs))}</b></span><span>Loan EMIs<b>${inr(sum(ls))}</b></span><span style="text-align:right">Unbilled<b>${inr(unb)}</b></span></div></div>`+sec('Credit cards',cs)+sec('Loans',ls)}
+function cards(){return `<div class="ra" style="padding:0 16px;margin:6px 0 0"><button class="btn p" onclick="cardForm()">Add new card</button></div>`+S.cards.filter(vis).map(c=>{const k=cc(c);const used=k.billed+k.unb;const o=open===c.id;
+return `<div class="card"><div class="h"><div><div class="n" style="font-weight:700">${c.name}</div><div class="m sub">${mem(c.owner)}</div></div>
+</div>
+${k.billed>0?`<div class="pby ${cls(dd(k.due))}"><span>Last day to pay</span><b>${k.due.toLocaleDateString('en-IN',{weekday:'short',day:'numeric',month:'short'})}</b><span>${when(dd(k.due))}</span></div>`:k.paid?`<div class="pby paid"><span>${k.how==='min'?'Minimum paid':'Paid in full'}</span><b>${k.how==='min'?inr(k.bill0-k.mn0)+' carried forward':inr(k.bill0)}</b></div>`:''}<div class="grid"><div>Bill amount<b>${inr(k.billed)}</b></div><div>Minimum due<b>${inr(k.min)}</b></div>
+<div>Unbilled spend<b>${inr(k.unb)}</b></div><div>Next statement<b>${fmt(k.nx)} (${dd(k.nx)}d)</b></div></div>
+<div class="bar"><i style="width:${Math.min(100,used/c.limit*100)}%"></i></div><div class="sub" style="margin-top:4px">${inr(used)} of ${inr(c.limit)} limit used</div>
+<div class="ra" style="justify-content:space-between"><button class="btn" onclick="open=${o?'null':`'${c.id}'`};render()">${o?'Hide entries':'Entries ('+k.es.length+')'}</button>${k.billed>0?`<button class="btn p" onclick="payAsk('${c.id}')">Mark paid</button>`:k.paid?`<button class="btn" onclick="undoPay('${c.id}')">Undo paid</button>`:''}</div><div class="ra"><button class="lk" onclick="edC('${c.id}')">Edit card</button><button class="lk late" onclick="dlC('${c.id}')">Delete card</button></div>
+${o?(c.stmts||[]).map(x=>`<div class="it" style="padding:8px 0"><div><div>Full statement</div><div class="m">${fmt(pd(x.date))} \u00B7 pay by ${fmt(pd(x.due))}${x.paid?' \u00B7 '+(x.how==='min'?'minimum paid':'paid'):''}</div></div><div class="amt">${inr(x.amt)}<div><button class="lk late" onclick="dlSt('${c.id}',${x.id})">Delete</button></div></div></div>`).join('')+k.es.slice().sort((a,b)=>b.date>a.date?1:-1).map(e=>`<div class="it" style="padding:8px 0"><div><div>${e.note||'Expense'}</div><div class="m">${fmt(pd(e.date))}${pd(e.date)>k.L?' \u00B7 unbilled':''}</div></div><div class="amt">${inr(e.amt)}<div><button class="lk" onclick="edEn(${e.id})">Edit</button><button class="lk late" onclick="dlEn(${e.id})">Delete</button></div></div></div>`).join(''):''}</div>`}).join('')||'<div class="empty">No cards for this member.</div>'}
+function loans(){return `<div class="ra" style="padding:0 16px;margin:6px 0 0"><button class="btn p" onclick="loanForm()">Add new loan</button></div>`+S.loans.filter(vis).map(l=>{const k=ln(l);const pct=100-l.principal/l.total*100;
+return `<div class="card"><div class="h"><div><div class="n" style="font-weight:700">${l.name}</div><div class="sub">${mem(l.owner)} \u00B7 ${l.rate}% a year, EMI on the ${l.day}th</div></div><div class="amt">${inr(l.emi)}<div class="sub">per month</div></div></div>
+<div class="grid"><div>Next EMI<b class="${cls(dd(k.d))}">${fmt(k.d)}</b></div><div>Principal left<b>${inr(l.principal)}</b></div>
+<div>Of this EMI: principal<b>${inr(k.p)}</b></div><div>Of this EMI: interest<b>${inr(k.i)}</b></div></div>
+<div class="bar"><i style="width:${pct}%"></i></div><div class="sub" style="margin-top:4px">${pct.toFixed(0)}% repaid</div>
+${l.last?`<div class="sub">Last EMI recorded for ${fmt(pd(l.last))}</div>`:''}<div class="ra" style="justify-content:space-between">${l.last?`<button class="btn" onclick="undoEmi('${l.id}')">Undo EMI</button>`:'<span></span>'}<button class="btn p" onclick="emiAsk('${l.id}')">Record EMI paid</button></div><div class="ra"><button class="lk" onclick="edL('${l.id}')">Edit loan</button><button class="lk late" onclick="dlL('${l.id}')">Delete loan</button></div></div>`}).join('')||'<div class="empty">No loans for this member.</div>'}
+function fam(){return S.members.map(m=>{let b=0,u=0,o=0,e=0;S.cards.filter(c=>c.owner===m.id).forEach(c=>{const k=cc(c);b+=k.billed;u+=k.unb});S.loans.filter(l=>l.owner===m.id).forEach(l=>{o+=l.principal;e+=l.emi});
+return `<div class="card"><div class="n" style="font-weight:700;font-size:17px">${m.name}</div><div class="grid"><div>Card bills due<b>${inr(b)}</b></div><div>Unbilled spend<b>${inr(u)}</b></div><div>Monthly EMIs<b>${inr(e)}</b></div><div>Loan principal left<b>${inr(o)}</b></div></div><div class="ra"><button class="lk" onclick="edM('${m.id}')">Rename</button><button class="lk late" onclick="dlM('${m.id}')">Delete</button></div></div>`}).join('')+`<div style="padding:8px 16px"><button class="btn p" onclick="addM()">Add family member</button></div>`}
+function render(){hdr();
+$('#chips').innerHTML=[{id:'all',name:'Everyone'}].concat(S.members).map(m=>`<button class="chip ${F===m.id?'on':''}" onclick="F='${m.id}';render()">${m.name}</button>`).join('');
+$('#nav').innerHTML=[['home','Home'],['cards','Cards'],['loans','Loans'],['fam','Family']].map(t=>`<button class="${tab===t[0]?'on':''}" onclick="tab='${t[0]}';render()">${t[1]}</button>`).join('');
+$('#main').innerHTML={home,cards,loans,fam}[tab]();document.querySelector('.fab').style.display=S.cards.length?'':'none'}
+function showS(h){$('#sc').innerHTML=h;$('#sheet').classList.add('show')}
+function closeS(){$('#sheet').classList.remove('show')}
+let X={mode:'e',m:null};
+function openExp(){if(!S.members.length)return note('Add a family member first (Family tab).');X.m=S.members.some(m=>m.id===X.m)?X.m:(F!=='all'?F:S.members[0].id);showForm()}
+function showForm(){const cs=S.cards.filter(c=>c.owner===X.m),st=X.mode==='s',du=iso(new Date(T.getTime()+18*864e5));
+showS(`<form onsubmit="return addE(event)"><h1 style="font-size:19px">${st?'Add statement':'Add expense'}</h1>
+<label>Entry type</label><select onchange="X.mode=this.value;showForm()"><option value="e" ${st?'':'selected'}>Daily expense</option><option value="s" ${st?'selected':''}>Full statement</option></select>
+<label>Family member</label><select onchange="X.m=this.value;showForm()">${S.members.map(m=>`<option value="${m.id}" ${m.id===X.m?'selected':''}>${m.name}</option>`).join('')}</select>
+<label>Card</label><select id="fc">${cs.map(c=>`<option value="${c.id}">${c.name}</option>`).join('')}</select>
+<label>${st?'Statement amount':'Amount'} in \u20B9</label><input id="fa" type="number" min="0" required inputmode="decimal">
+${st?`<label>Minimum due in \u20B9 (optional)</label><input id="fm" type="number" min="0" inputmode="decimal"><label>Statement date</label><input id="fd" type="date" value="${iso(T)}" required><label>Last date to pay</label><input id="fu" type="date" value="${du}" required>`:`<label>What for</label><input id="fn" placeholder="Groceries"><label>Date</label><input id="fd" type="date" value="${iso(T)}" required>`}
+<div class="ra"><button type="button" class="btn" onclick="closeS()">Cancel</button><button class="btn p">${st?'Save statement':'Save expense'}</button></div></form>`)}
+function addE(ev){ev.preventDefault();const c=S.cards.find(x=>x.id===$('#fc').value);if(!c)return note('This member has no card yet. Add the card first (Cards tab).');if(X.mode==='s'&&$('#fu').value<$('#fd').value)return note('Last date to pay must be on or after the statement date.');
+if(X.mode==='s')(c.stmts=c.stmts||[]).push({id:Date.now(),date:$('#fd').value,amt:+$('#fa').value,min:$('#fm').value===''?null:+$('#fm').value,due:$('#fu').value,paid:false});
+else S.entries.push({id:Date.now(),card:c.id,amt:+$('#fa').value,note:cl_($('#fn').value),date:$('#fd').value});
+save();closeS();tab='cards';open=c.id;render();return false}
+function payAsk(id){const c=S.cards.find(x=>x.id===id),k=cc(c);showS(`<div class="box"><h1 style="font-size:19px">${c.name}</h1><div class="sub">Last day to pay: ${fmt(k.due)}</div>
+<button class="pb" onclick="pay('${id}','full')"><b>Paid in full</b><span>${inr(k.billed)}</span></button>
+<button class="pb" onclick="pay('${id}','min')"><b>Paid minimum only</b><span>${inr(k.min)} paid, ${inr(k.billed-k.min)} carries forward</span></button>
+<div class="ra"><button class="btn" onclick="closeS()">Cancel</button></div></div>`)}
+function pay(id,how){const c=S.cards.find(x=>x.id===id),k=cc(c);if(k.st&&pd(k.st.date)>=k.L){k.st.paid=true;k.st.how=how}else{c.paid=iso(k.L);c.how=how}save();closeS();render()}
+let CB=null,GW='';
+const q=x=>String(x==null?'':x).replace(/"/g,'&quot;');
+const opts=id=>S.members.map(m=>`<option value="${m.id}" ${m.id===id?'selected':''}>${m.name}</option>`).join('');
+const btns=a=>`<div class="ra"><button type="button" class="btn" onclick="closeS()">Cancel</button><button class="btn p">${a}</button></div>`;
+function ask(m,f){CB=f;showS(`<div class="box"><h1 style="font-size:19px">Are you sure?</h1><p>${m}</p><div class="ra"><button class="btn" onclick="closeS()">No, go back</button><button class="btn p" onclick="closeS();CB()">Yes, do it</button></div></div>`)}
+function note(m){showS(`<div class="box"><p>${m}</p><div class="ra"><button class="btn p" onclick="closeS()">OK</button></div></div>`)}
+function guard(w,m,f){CB=f;GW=w;showS(`<form onsubmit="return gok(event)"><h1 style="font-size:19px">Security check</h1><p>${m}</p><label>Type <b>${w}</b> to continue</label><input id="gw" autocomplete="off" required><div class="sub late" id="ge" style="margin-top:6px"></div>${btns('Continue')}</form>`)}
+function gok(e){e.preventDefault();if($('#gw').value.trim().toLowerCase()===GW.toLowerCase()){closeS();CB()}else $('#ge').textContent='That does not match. Please type it exactly.';return false}
+function cardForm(id){if(!S.members.length)return note('Add a family member first (Family tab).');const c=id?S.cards.find(x=>x.id===id):{owner:F!=='all'?F:S.members[0].id,name:'',limit:'',stmt:'',due:''};
+showS(`<form onsubmit="return saveC(event,'${id||''}')"><h1 style="font-size:19px">${id?'Edit card':'Add new card'}</h1>
+<label>Family member</label><select id="co">${opts(c.owner)}</select>
+<label>Card name</label><input id="cn" value="${q(c.name)}" placeholder="SBI Card" required>
+<label>Credit limit in \u20B9</label><input id="cl" type="number" min="1" value="${c.limit}" required inputmode="decimal">
+<label>Statement day of month (1 to 31)</label><input id="cs" type="number" min="1" max="31" value="${c.stmt}" required>
+<label>Payment due day of month (1 to 31)</label><input id="cd" type="number" min="1" max="31" value="${c.due}" required>${btns('Save card')}</form>`)}
+function saveC(e,id){e.preventDefault();const v={owner:$('#co').value,name:cl_($('#cn').value),limit:+$('#cl').value,stmt:+$('#cs').value,due:+$('#cd').value};
+if(id)Object.assign(S.cards.find(x=>x.id===id),v);else S.cards.push(Object.assign({id:'c'+Date.now(),paid:'',stmts:[]},v));save();closeS();tab='cards';render();return false}
+function loanForm(id){if(!S.members.length)return note('Add a family member first (Family tab).');const l=id?S.loans.find(x=>x.id===id):{owner:F!=='all'?F:S.members[0].id,name:'',total:'',principal:'',rate:'',emi:'',day:''};
+showS(`<form onsubmit="return saveL(event,'${id||''}')"><h1 style="font-size:19px">${id?'Edit loan':'Add new loan'}</h1>
+<label>Family member</label><select id="lo">${opts(l.owner)}</select>
+<label>Loan name</label><input id="ln" value="${q(l.name)}" placeholder="Car loan (SBI)" required>
+<label>Original loan amount in \u20B9</label><input id="lt" type="number" min="1" value="${l.total}" required>
+<label>Principal still left in \u20B9</label><input id="lp" type="number" min="0" value="${l.principal}" required>
+<label>Interest rate per year (%)</label><input id="lr" type="number" step="0.01" min="0" value="${l.rate}" required>
+<label>Monthly EMI in \u20B9</label><input id="le" type="number" min="1" value="${l.emi}" required>
+<label>EMI day of month (1 to 31)</label><input id="ld" type="number" min="1" max="31" value="${l.day}" required>${btns('Save loan')}</form>`)}
+function saveL(e,id){e.preventDefault();const p=+$('#lp').value,v={owner:$('#lo').value,name:cl_($('#ln').value),total:Math.max(+$('#lt').value,p),principal:p,rate:+$('#lr').value,emi:+$('#le').value,day:+$('#ld').value};
+if(id)Object.assign(S.loans.find(x=>x.id===id),v);else S.loans.push(Object.assign({id:'l'+Date.now(),last:''},v));save();closeS();tab='loans';render();return false}
+function enForm(id){const e=S.entries.find(x=>x.id===id);showS(`<form onsubmit="return saveEn(event,${id})"><h1 style="font-size:19px">Edit expense</h1><label>Amount in \u20B9</label><input id="ea" type="number" min="0" value="${e.amt}" required><label>What for</label><input id="en" value="${q(e.note)}"><label>Date</label><input id="ed" type="date" value="${e.date}" required>${btns('Save changes')}</form>`)}
+function saveEn(ev,id){ev.preventDefault();Object.assign(S.entries.find(x=>x.id===id),{amt:+$('#ea').value,note:cl_($('#en').value),date:$('#ed').value});save();closeS();render();return false}
+function addM(id){const m=id?S.members.find(x=>x.id===id):{name:''};showS(`<form onsubmit="return saveM(event,'${id||''}')"><h1 style="font-size:19px">${id?'Rename member':'Add family member'}</h1><label>Name</label><input id="mn" value="${q(m.name)}" required>${btns('Save member')}</form>`)}
+function saveM(ev,id){ev.preventDefault();const n=cl_($('#mn').value);if(id)S.members.find(x=>x.id===id).name=n;else S.members.push({id:'m'+Date.now(),name:n});save();closeS();render();return false}
+const gC=id=>S.cards.find(x=>x.id===id),gL=id=>S.loans.find(x=>x.id===id),gM=id=>S.members.find(x=>x.id===id);
+function edC(id){guard(gC(id).name,'Type the card name to edit it.',()=>cardForm(id))}
+function dlC(id){const c=gC(id);guard(c.name,'This permanently deletes the card with all its entries and statements.',()=>{S.cards=S.cards.filter(x=>x.id!==id);S.entries=S.entries.filter(e=>e.card!==id);open=null;save();render()})}
+function edL(id){guard(gL(id).name,'Type the loan name to edit it.',()=>loanForm(id))}
+function dlL(id){guard(gL(id).name,'This permanently deletes the loan.',()=>{S.loans=S.loans.filter(x=>x.id!==id);save();render()})}
+function edM(id){guard(gM(id).name,'Type the name to rename this member.',()=>addM(id))}
+function dlM(id){const m=gM(id);if(S.cards.some(c=>c.owner===id)||S.loans.some(l=>l.owner===id))return note('Delete or move this member\u2019s cards and loans first.');guard(m.name,'This permanently deletes the member.',()=>{S.members=S.members.filter(x=>x.id!==id);if(F===id)F='all';save();render()})}
+function edEn(id){guard('edit','Type edit to change this expense.',()=>enForm(id))}
+function dlEn(id){guard('delete','Type delete to remove this expense.',()=>{S.entries=S.entries.filter(x=>x.id!==id);save();render()})}
+function dlSt(cid,sid){guard('delete','Type delete to remove this statement.',()=>{const c=gC(cid);c.stmts=c.stmts.filter(x=>x.id!==sid);save();render()})}
+function undoPay(id){ask('This will remove the paid mark from this card\u2019s bill.',()=>{const c=gC(id),k=cc(c);if(k.st&&k.st.paid&&pd(k.st.date)>=k.L){k.st.paid=false;k.st.how=''}else{c.paid='';c.how=''}save();render()})}
+function emiAsk(id){const l=gL(id);ask('Record the '+fmt(ln(l).d)+' EMI of '+inr(l.emi)+' for '+l.name+' as paid?',()=>{const k=ln(l),b=l.principal;l.principal=Math.max(0,Math.round(b-k.p));l.last=iso(k.d);l.lastP=b-l.principal;save();render()})}
+function undoEmi(id){const l=gL(id);ask('Undo the last recorded EMI of '+l.name+'? Its principal goes back.',()=>{l.principal+=l.lastP||0;l.last='';l.lastP=0;save();render()})}
+render();conn();
+addEventListener('online',()=>conn());
+document.addEventListener('visibilitychange',()=>{if(document.hidden)return;const n=new Date();n.setHours(0,0,0,0);if(+n!==+T)T=n;render();conn()});
+let dp=null;addEventListener('beforeinstallprompt',e=>{e.preventDefault();dp=e;$('#ib').style.display=''});
+function inst(){if(dp){dp.prompt();dp=null;$('#ib').style.display='none'}}
+addEventListener('appinstalled',()=>{$('#ib').style.display='none'});
+if(/iPad|iPhone|iPod/.test(navigator.userAgent)&&!navigator.standalone)$('#ios').style.display='';
+if('serviceWorker' in navigator)navigator.serviceWorker.register('/sw.js').catch(()=>{});
+</script></body></html>
